@@ -17,16 +17,29 @@ public class Product
 	private Double			price;
 	@Column(length = 500)
 	private String			description;
+	@NotBlank
+	private String			category;
+	@Positive
+	private Integer			maxDiscount;
+	@Positive
+	private Integer			stock;
+	private Double			weight;
+	@NotBlank
+	private	Boolean			digitalProduct;
 	private LocalDateTime	creationDate;
 
 	protected Product() {
     }
 
-	public Product(String name, Double price, String description){
+	public Product(String name, Double price, String description, String category, Integer maxDiscount, Integer stock, Double weight){
 		this();
 		this.name = name;
 		this.price = price;
 		this.description = description;
+		this.category = category;
+		this.maxDiscount = maxDiscount;
+		this.stock = stock;
+		this.weight = weight;
 		this.creationDate = LocalDateTime.now();
 	}
 
@@ -46,6 +59,26 @@ public class Product
 		return description;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public Integer getMaxDiscount() {
+		return maxDiscount;
+	}
+
+	public Integer getStock() {
+		return stock;
+	}
+
+	public Double getWeight() {
+		return weight;
+	}
+
+	public Boolean getDigitalProduct() {
+		return digitalProduct;
+	}
+
 	public LocalDateTime getCreationDate(){
 		return creationDate;
 	}
@@ -61,5 +94,27 @@ public class Product
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public void setMaxDiscount(Integer maxDiscount) {
+		this.maxDiscount = maxDiscount;
+	}
+
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
+	public void setWeight(Double weight) {
+		this.weight = weight;
+	}
+
+	public void setDigitalProduct(Boolean digitalProduct) {
+		this.digitalProduct = digitalProduct;
+	}
+
+	
 
 }
