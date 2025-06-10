@@ -2,8 +2,8 @@ package com.project.produtosapi.model; // é um endereçamento e agrupador para 
 
 import jakarta.persistence.*;  // traz as anotações para manusear o banco de dados
 import java.time.LocalDateTime;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
+
 
 @Entity
 public class Product
@@ -24,14 +24,14 @@ public class Product
 	@Positive
 	private Integer			stock;
 	private Double			weight;
-	@NotBlank
+	@NotNull
 	private	Boolean			digitalProduct;
 	private LocalDateTime	creationDate;
 
 	protected Product() {
     }
 
-	public Product(String name, Double price, String description, String category, Integer maxDiscount, Integer stock, Double weight){
+	public Product(String name, Double price, String description, String category, Integer maxDiscount, Integer stock, Double weight, boolean digitalProduct){
 		this();
 		this.name = name;
 		this.price = price;
@@ -40,6 +40,7 @@ public class Product
 		this.maxDiscount = maxDiscount;
 		this.stock = stock;
 		this.weight = weight;
+		this.digitalProduct = digitalProduct;
 		this.creationDate = LocalDateTime.now();
 	}
 

@@ -1,5 +1,7 @@
 package com.project.produtosapi.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -32,7 +34,7 @@ public class ProductService {
 	}
 
 	// === Validações de Regras ===
-	public void checkRules(Product product)
+	public void checkCreationRules(Product product)
 	{
 		if (!rule1.isSatisfiedBy(product))
 			throw new BusinessRuleException("Descrição ofensiva não permitida");
@@ -46,11 +48,31 @@ public class ProductService {
 			throw new BusinessRuleException("Não podem haver nomes duplicados");
 	}
 
-	// === CRUD ===
-	public Product createProduct(Product product) {
+	public void checkUpdateRules(Product product)
+	{
+		if (!rule1.isSatisfiedBy(product))
+			throw new BusinessRuleException("Descrição ofensiva não permitida");
+		if (!rule2.isSatisfiedBy(product))
+			throw new BusinessRuleException("Produto digital não deve ter estoque");
+		if (!rule3.isSatisfiedBy(product))
+			throw new BusinessRuleException("Produto digital não deve ter peso");
+		if (!rule4.isSatisfiedBy(product))
+			throw new BusinessRuleException("Produto alimentício deve ter uma descrição");
+	}
 
-		checkRules(product);
-		return (productRepository.save(product));
+	// === CRUD ===
+	public Product createDTOProduct(ProductCreateDTO dto) {
+		Product new_product = new Product(
+			dto.getName(),
+			dto.getPrice(),
+			dto.getDescription(),
+			dto.getCategory(),
+			dto.getMaxDiscount(),
+			dto.getStock(),
+			dto.getWeight(),
+			dto.getDigitalProduct());
+		checkCreationRules(new_product);
+		return (productRepository.save(new_product));
 	}
 
 	public Product findProductById(Long id) {
@@ -63,9 +85,8 @@ public class ProductService {
 			throw new ProductNotFoundException(id);
     }
 
-	public Product updateProduct(Long id, ProductUpdateDTO data)
-	{
-		Product product = this.findProductById(id); //aqui a exceção interrompe a função se for lançada
+	public Product updateProduct(Long id, ProductUpdateDTO data) {
+		Product product = this.findProductById(id); //aqui a exceção interrompe o resto da função, se for lançada
 
 		if (data.getDescription() != null)
 			product.setDescription(data.getDescription());
@@ -76,11 +97,29 @@ public class ProductService {
 		if (data.getStock() != null)
 			product.setStock(data.getStock());
 		
-		checkRules(product);
+		checkUpdateRules(product);
 		return (productRepository.save(product));
 		/* aqui as modificações são feitas no product em cada set e após isso as regras de negócio são novamente reavaliadas.
 		 * porem só há o save no banco de dados após todas as regras serem validadas, não permitindo assim valores fora da regra dentro do banco de dados
 		 */
+	}
+
+	public List<ProductResponseDTO> getAll()
+	{
+		List<Product> products;
+		List<ProductResponseDTO> response = new ArrayList<>();;
+		int	index = -1;
+
+		products = productRepository.findAll();
+		while(++index < products.size())
+			response.add(toDTO(products.get(index)));
+		return (response);
+	}
+
+	public void deleteProduct(Long id){
+		Product product = this.findProductById(id);
+		productRepository.delete(product);
+		return ;
 	}
 
 	// === Conversão ===
@@ -95,15 +134,4 @@ public class ProductService {
 
 		return (dto);
 	}
-
 }
-
-   // /*public Product findProductById(Long id) { /*...*/}
-
-   // public Product updateProduct(Long id, ProductUpdateDTO dto) { /*...*/ }
-
-   // public void deleteProduct(Long id) { /*...*/ }
-
-    // Método interno/exemplo
-   // private void validateProductPrice(Product product) { /*...*/ }*/
-

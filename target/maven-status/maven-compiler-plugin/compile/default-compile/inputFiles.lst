@@ -1,1 +1,17 @@
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/ProdutosApiApplication.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/controller/ProductController.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/dto/ProductCreateDTO.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/dto/ProductResponseDTO.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/dto/ProductUpdateDTO.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/exception/BusinessRuleException.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/exception/GlobalExceptionHandler.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/exception/ProductNotFoundException.java
 /home/rpassos-/product-api/src/main/java/com/project/produtosapi/model/Product.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/repository/ProductRepository.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/service/ProductService.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/specification/DescriptionForbbidenWordsSpec.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/specification/DigitalNoStockSpec.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/specification/DigitalNoWeightSpec.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/specification/FoodDescriptionSpec.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/specification/NoDuplicatedNameInCategorySpec.java
+/home/rpassos-/product-api/src/main/java/com/project/produtosapi/specification/Specification.java
