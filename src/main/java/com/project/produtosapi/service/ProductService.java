@@ -99,7 +99,7 @@ public class ProductService {
 		
 		checkUpdateRules(product);
 		return (productRepository.save(product));
-		/* aqui as modificações são feitas no product em cada set e após isso as regras de negócio são novamente reavaliadas.
+		/* aqui as modificações são feitas no product em cada setter e após isso as regras de negócio são novamente reavaliadas.
 		 * porem só há o save no banco de dados após todas as regras serem validadas, não permitindo assim valores fora da regra dentro do banco de dados
 		 */
 	}

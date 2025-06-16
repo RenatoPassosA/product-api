@@ -2,6 +2,15 @@ package com.project.produtosapi.dto;
 
 import jakarta.validation.constraints.*;
 
+
+/*
+ * Usar um DTO (como ProductCreateDTO) em vez de um modelo de banco de dados (Product) para transferir dados via API oferece segurança, flexibilidade, controle de validação,
+ * e uma separação clara de responsabilidades.
+ * DTOs permitem que você controle melhor os dados expostos, simplifique validações de entrada e evite a exposição de dados desnecessários.
+ * Quando usar Product diretamente: Para operações internas dentro do backend, onde você tem controle total sobre os dados e não está exposto ao cliente.
+ * Quando usar DTO: Sempre que precisar transferir dados para o cliente (via API) e quiser controlar a estrutura e os dados que são expostos.
+ */
+
 public class ProductCreateDTO {
 
     @NotBlank(message = "O nome é obrigatório")

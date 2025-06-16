@@ -2,7 +2,6 @@ package com.project.produtosapi.controller;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.project.produtosapi.repository.*;
 import com.project.produtosapi.model.*;
 import com.project.produtosapi.service.*;
 import com.project.produtosapi.dto.*;

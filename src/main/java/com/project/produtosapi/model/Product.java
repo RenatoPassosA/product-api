@@ -116,6 +116,9 @@ public class Product
 		this.digitalProduct = digitalProduct;
 	}
 
-	
 
+	//-----only for tests-----
+	public void setId(Long id) {
+    	this.id = id;
+	}
 }
